@@ -4,10 +4,15 @@
   <meta charset="UTF-8">
   <title>recharge</title>
   <link rel="stylesheet" href="css/style.css">
-  
+  <link href="css/bootstrap-combined.min.css" rel="stylesheet">
+  <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
 </head>
 <body>
   <div id="content">
+    <div class="row">
+      <button class="btn reset">reset</button>
+      <button class="btn submit">submit</button>
+    </div>
     <div class="selection">
       <ul>
         <li class="item">100元</li>
@@ -21,53 +26,26 @@
   </div>
 
 <script>
-/* jQuery方法实现
+ // jQuery方法实现多选.点一下选中，再点一下取消
   $(function(){
-    $('.item').on('click', function() {
-      $(this).addClass('active');
-      $(this).siblings('.item').removeClass('active');
+    $('.item').on('click', function(e) {
+      // 如果是选中状态，则取消；反正则选中
+      if ($(this).hasClass('active')) {
+        $(this).removeClass('active');
+      } else {
+        $(this).addClass('active');
+      }
+    })
+
+    $('.reset').on('click', function(e) {
+      $('ul li').removeClass('active');
+    })
+
+    $('.submit').on('click', function(e) {
+      var text = $('ul li').filter('.active').text();
+      console.log(text);
     })
   })
-*/
-
-// js原生实现
-// 利用事件代理代替for循环
-var ul = document.getElementsByTagName('ul')[0];
-ul.addEventListener('click', myFunction, false);
-
-function myFunction(e) {
-  var target = e.target;
-  if (target.tagName == 'LI') {
-    target.setAttribute('class', 'item active');
-    var siblings = sibling(target);
-    siblings.forEach(function(ele) {
-      ele.setAttribute('class', 'item');
-    });
-  };
-}
-
-// 定义一个sibling()方法。利用previousSibling，nextSibling
-function sibling(obj) {
-  var arr = [];
-  var pre = obj.previousSibling;
-  var next = obj.nextSibling;
-
-  while (pre) {
-    if (pre.nodeType === 1) {
-      arr.push(pre);
-    };
-    pre = pre.previousSibling;
-  }
-
-  while (next) {
-    if (next.nodeType === 1) {
-      arr.push(next);
-    };
-    next = next.nextSibling;
-  }
-  return arr;
-}
-
 
 </script>
 </body>

@@ -1,13 +1,16 @@
 .selection {
-  /*水平居中*/
-  margin: auto 0;
-  /*垂直居中*/
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
+.row {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .item {
   margin: 5px;
@@ -31,4 +34,9 @@
 .active {
   background-color: red;
   color: white;
+}
+
+.reset, .submit {
+  width: 90px;
+  margin: 0 20px;
 }
