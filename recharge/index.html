@@ -9,11 +9,14 @@
 </head>
 <body>
   <div id="content">
-    <div class="row">
-      <button class="btn reset">reset</button>
-      <button class="btn submit">submit</button>
-    </div>
-    <div class="selection">
+
+    <!-- 单选 -->
+    <div class="single-selection">
+      <p class="description">单选</p>
+      <div class="row">
+        <button class="btn reset">reset</button>
+        <button class="btn submit">submit</button>
+      </div>      
       <ul>
         <li class="item">100元</li>
         <li class="item">300元</li>
@@ -22,13 +25,65 @@
         <li class="item">1500元</li>
         <li class="item">2000元</li>
       </ul>
+      <hr>
     </div>    
+
+    <!-- 多选 -->
+    <div class="multi-selection">
+      <p class="description">多选</p>
+      <div class="row">
+        <button class="btn reset">reset</button>
+        <button class="btn submit">submit</button>
+      </div>      
+      <ul>
+        <li class="item">100元</li>
+        <li class="item">300元</li>
+        <li class="item">500元</li>
+        <li class="item">1000元</li>
+        <li class="item">1500元</li>
+        <li class="item">2000元</li>
+      </ul>
+      <hr>      
+    </div>  
+
+    <!-- 只能选5个 -->
+    <div class="special-selection">
+      <p class="description">只能选5个</p>    
+      <div class="row">
+        <button class="btn reset">reset</button>
+        <button class="btn submit">submit</button>
+      </div>      
+      <ul>
+        <li class="item">100元</li>
+        <li class="item">300元</li>
+        <li class="item">500元</li>
+        <li class="item">1000元</li>
+        <li class="item">1500元</li>
+        <li class="item">2000元</li>
+      </ul>
+    </div>          
   </div>
 
 <script>
- // jQuery方法实现多选.点一下选中，再点一下取消
+
   $(function(){
-    $('.item').on('click', function(e) {
+    // 单选.点击元素被选中，其它元素被取消
+    $('.single-selection .item').on('click', function(e) {
+      $(this).addClass('active');
+      $(this).siblings('.item').removeClass('active');
+    })
+    
+    $('.single-selection .reset').on('click', function(e) {
+      $('.single-selection ul li').removeClass('active');
+    })  
+
+    $('.single-selection .submit').on('click', function(e) {
+      var text = $('.single-selection ul li').filter('.active').text();
+      console.log(text);
+    })
+
+    // 多选.点一下选中，再点一下取消
+    $('.multi-selection .item').on('click', function(e) {
       // 如果是选中状态，则取消；反正则选中
       if ($(this).hasClass('active')) {
         $(this).removeClass('active');
@@ -37,14 +92,43 @@
       }
     })
 
-    $('.reset').on('click', function(e) {
-      $('ul li').removeClass('active');
+    $('.multi-selection .reset').on('click', function(e) {
+      $('.multi-selection ul li').removeClass('active');
     })
 
-    $('.submit').on('click', function(e) {
-      var text = $('ul li').filter('.active').text();
+    $('.multi-selection .submit').on('click', function(e) {
+      var text = $('.multi-selection ul li').filter('.active').text();
       console.log(text);
+    })    
+
+    // 特别的多选：只能选5个
+    $('.special-selection .item').on('click', function(e) {
+      if ($(this).hasClass('active')) {
+        $(this).removeClass('active');
+      } else {
+        
+        var flag = $(this).siblings('.item').filter('.active').length + 1;
+        if (flag < 6) {
+          $(this).addClass('active');
+        };
+      }
     })
+    $('.special-selection .reset').on('click', function(e) {
+      $('.special-selection ul li').removeClass('active');
+    })
+    
+    $('.special-selection .submit').on('click', function(e) {
+      var text = $('.special-selection ul li').filter('.active').text();
+      console.log(text);
+    })     
+
+
+
+ 
+
+
+
+
   })
 
 </script>
