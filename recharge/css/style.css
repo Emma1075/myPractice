@@ -1,3 +1,7 @@
+* {
+  color:  #858585;
+}
+
 #content {
   position: absolute;
   left: 50%;
@@ -5,12 +9,12 @@
   transform: translate(-50%,-50%);
 }
 .item {
-  margin: 0 15px 15px 0;
   display: inline-block;
+  margin: 0 15px 15px 0;
   width: 100px;
   height: 50px;
   background-color: #FFF;
-  border: 1px solid #000;
+  border: 1px solid #C7C7C7;
 }
 
 /*文字居中*/
@@ -24,7 +28,8 @@
 }
 
 .active {
-  background-color: red;
+  background-color: #CD2626;
+  border-color:     #CD0000;
   color: white;
 }
 
