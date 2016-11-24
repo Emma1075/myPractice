@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+      .box span{display:inline-block;padding:5px 20px;border:1px solid #222;margin:30px 15px;cursor:pointer;}
+      .active{background:#90ee90;}
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <span>100</span>
+      <span>200</span>
+      <span>300</span>
+      <span>400</span>
+      <span>500</span>
+      <span>600</span>
+      <span>700</span>
+    </div>
+  </body>
+  <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+  <script>
+      $(function(){
+        var arr = [];
+        $('.box span').on('click',function(){
+          $('.box span').each(function(){
+            $(this).attr('class','');
+          })
+          
+          if(arr.indexOf($(this).index()) == -1){
+            arr.push($(this).index());
+          }else{
+            arr.splice(arr.indexOf($(this).index()),1)
+          }
+
+          if(arr.length > 3){
+            // arr.splice(0,1);
+            arr.shift();
+            // console.log(arr);
+          }
+          arr.forEach(function(ele){
+            $('.box span').eq(ele).addClass('active');
+          })
+        })
+      })
+  </script>
+</html>
