@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <title>recharge</title>
   <link rel="stylesheet" href="css/style.css">
-  <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+  
 </head>
 <body>
   <div id="content">
     <div class="selection">
-      <ul class="charge">
+      <ul>
         <li class="item">100元</li>
         <li class="item">300元</li>
         <li class="item">500元</li>
@@ -20,14 +20,57 @@
     </div>    
   </div>
 
-  <script>
+<script>
+/* jQuery方法实现
   $(function(){
     $('.item').on('click', function() {
       $(this).addClass('active');
       $(this).siblings('.item').removeClass('active');
     })
   })
+*/
 
-  </script>
+// js原生实现
+// 利用getAttribute(),setAttribute(),removeAttribute();
+var li = document.getElementsByTagName('li');
+
+for (var i = 0; i < li.length; i++) {
+  var item = li[i];
+  item.addEventListener('click', myFunction);
+  
+};
+
+function myFunction() {
+  this.setAttribute('class', 'item active');
+  var siblings = sibling(this);
+  siblings.forEach(function(ele) {
+    ele.setAttribute('class', 'item');
+  });
+}
+
+// 定义一个sibling()方法。利用previousSibling，nextSibling
+function sibling(obj) {
+  var arr = [];
+  var pre = obj.previousSibling;
+  var next = obj.nextSibling;
+
+  while (pre) {
+    if (pre.nodeType === 1) {
+      arr.push(pre);
+    };
+    pre = pre.previousSibling;
+  }
+
+  while (next) {
+    if (next.nodeType === 1) {
+      arr.push(next);
+    };
+    next = next.nextSibling;
+  }
+  return arr;
+}
+
+
+</script>
 </body>
 </html>
