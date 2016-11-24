@@ -31,21 +31,19 @@
 */
 
 // js原生实现
-// 利用getAttribute(),setAttribute(),removeAttribute();
-var li = document.getElementsByTagName('li');
+// 利用事件代理代替for循环
+var ul = document.getElementsByTagName('ul')[0];
+ul.addEventListener('click', myFunction, false);
 
-for (var i = 0; i < li.length; i++) {
-  var item = li[i];
-  item.addEventListener('click', myFunction);
-  
-};
-
-function myFunction() {
-  this.setAttribute('class', 'item active');
-  var siblings = sibling(this);
-  siblings.forEach(function(ele) {
-    ele.setAttribute('class', 'item');
-  });
+function myFunction(e) {
+  var target = e.target;
+  if (target.tagName == 'LI') {
+    target.setAttribute('class', 'item active');
+    var siblings = sibling(target);
+    siblings.forEach(function(ele) {
+      ele.setAttribute('class', 'item');
+    });
+  };
 }
 
 // 定义一个sibling()方法。利用previousSibling，nextSibling
