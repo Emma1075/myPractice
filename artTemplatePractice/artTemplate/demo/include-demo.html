@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>include demo</title>
+  <script src="../dist/template.js"></script>
+</head>
+<body>
+<div id="content"></div>
+
+<script id="test" type="text/html">
+
+  <h1>{{title}}</h2>
+  {{include 'childList1'}}
+  {{include 'childList2'}}
+
+</script>
+
+<script id="childList1" type="text/html">
+  <h2> 2016.11.23 </h2>
+    <ul>
+      {{each list1 as value i}}
+        <li>{{i + 1}} : {{value}}</li>
+      {{/each}}
+    </ul>
+</script>
+
+<script id="childList2" type="text/html">
+  <h2> 2016.11.24 </h2>
+    <ul>
+      {{each list2 as value i}}
+        <li>{{i + 1}} : {{value}}</li>
+      {{/each}}
+    </ul>
+</script>
+
+<script type="text/javascript">
+  var data = {
+    title: '待办事项',
+    list1: ['模板引擎', 'node.js', 'fis3' ],
+    list2: ['css', 'js']
+  };
+  var html = template('test', data);
+  document.getElementById('content').innerHTML = html;
+</script>
+
+</body>
+</html>
+

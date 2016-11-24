@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>basic demo</title>
+  <script src="../dist/template.js"></script>
+</head>
+<body>
+<div id="content"></div>
+
+<script id="test" type="text/html">
+{{if isAdmin}}
+
+  <h2>{{date}}</h2>
+  <ul>
+      {{each list as value i}}
+          <li>{{i + 1}} ：{{value}}</li>
+      {{/each}}
+  </ul>
+
+{{/if}}
+</script>
+
+<script type="text/javascript">
+  var data = {
+    date: '2016.11.23 待办事项',
+    isAdmin: true,
+    list: ['模板引擎', 'node.js', 'fis3' ]
+  };
+  var html = template('test', data);
+  document.getElementById('content').innerHTML = html;
+</script>
+
+</body>
+</html>
+
