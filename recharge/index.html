@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>recharge</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+</head>
+<body>
+  <div id="content">
+    <div class="selection">
+      <ul class="charge">
+        <li class="item">100元</li>
+        <li class="item">300元</li>
+        <li class="item">500元</li>
+        <li class="item">1000元</li>
+        <li class="item">1500元</li>
+        <li class="item">2000元</li>
+      </ul>
+    </div>    
+  </div>
+
+  <script>
+  $(function(){
+    $('.item').on('click', function() {
+      $(this).addClass('active');
+      $(this).siblings('.item').removeClass('active');
+    })
+  })
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+.selection {
+  margin: 250px;
+}
+
+.item {
+  margin: 5px;
+  display: inline-block;
+  width: 100px;
+  height: 50px;
+  background-color: #FFF;
+  border: 1px solid #000;
+}
+
+.item {
+  text-align: center;
+  line-height: 50px;
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+.active {
+  background-color: red;
+  color: white;
+}
