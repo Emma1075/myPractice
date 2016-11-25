@@ -2,23 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>recharge</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link href="css/bootstrap-combined.min.css" rel="stylesheet">
-  <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
-  <script src="js/template.js"></script>
+  <title>index demo</title>
+  <script src="../dist/template.js"></script>
+  <style type="text/css">
+    .item {
+      display: inline-block;
+      margin: 0 15px 15px 0;
+      width: 100px;
+      height: 50px;
+      background-color: #FFF;
+      border: 1px solid #C7C7C7;
+    }
+    .item {
+      text-align: center;
+      line-height: 50px;
+    }
+  </style>
 </head>
 <body>
-  <div id="content">
-    <div class="row">
-      <button class="btn reset">reset</button>
-      <button class="btn submit">submit</button>
-    </div> 
+<div id="content">
+  
+</div>
 
-  </div>
-
-
-<script id = "test" type="text/html">
+<script id="test" type="text/html">
   <div class="{{id}}">
     <p>{{type}}</P>
     <ul> 
@@ -122,7 +128,9 @@
   var html = template('test',data.recharge);
   html += template('test',data.fruit);
   html += template('test',data.meat);
-  document.getElementById('content').innerHTML += html;
+  document.getElementById('content').innerHTML = html;
 </script>
+
 </body>
 </html>
+
