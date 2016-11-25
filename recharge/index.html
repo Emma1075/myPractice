@@ -9,28 +9,26 @@
   <script src="js/template.js"></script>
 </head>
 <body>
-  <div id="content">
+  <div id="content" data-name="test1">
     <div class="row">
       <button class="btn reset">reset</button>
       <button class="btn submit">submit</button>
     </div> 
-
   </div>
-
 
 <script id = "test" type="text/html">
   <div class="{{id}}">
-    <p>{{type}}</P>
+    <p>{{type}}</p>
     <ul> 
       {{each list as value i}}
-      <li class="item" date-id="{{value.id}}">{{value.text}}</li>
+      <li class="item" data-id="{{value.id}}">{{value.text}}</li>
       {{/each}}
     </ul>
   </div>
 </script>
 
 <script type="text/javascript">
-  var data = { recharge: {
+  var data = {recharge: {
       "id": "recharge", 
       "type": "充值", 
       "list": [
@@ -119,10 +117,92 @@
       ]
     }
   };
-  var html = template('test',data.recharge);
-  html += template('test',data.fruit);
-  html += template('test',data.meat);
+  var html = template('test', data.recharge);
+  html += template('test', data.fruit);
+  html += template('test', data.meat);
   document.getElementById('content').innerHTML += html;
+</script>
+
+<script type="text/javascript">
+  
+  $(function(){
+
+    // 单选.点击元素被选中，其它元素被取消
+    $('.recharge .item').on('click', function(e) {
+      $(this).addClass('active');
+      $(this).siblings('.item').removeClass('active');
+    })
+    
+    // 多选.点一下选中，再点一下取消
+    $('.fruit .item').on('click', function(e) {
+      // 如果是选中状态，则取消；反正则选中
+      if ($(this).hasClass('active')) {
+        $(this).removeClass('active');
+      } else {
+        $(this).addClass('active');
+      }
+    })
+
+    // 特别的多选：只能选3个.第四个被选中时，第一个被选中的li元素取消选中状态。
+    var arr = []; // 通过数组来存放选中元素的索引
+    $('.meat .item').on('click', function(e) {
+      $('.meat .item').each(function() {
+        $(this).attr('class', 'item');
+      })
+      
+      var index = $(this).index();  // 获取索引
+      // 如果数组里没有这个索引值，则加入
+      if (arr.indexOf(index) == -1) {
+        arr.push(index);  
+      } else {
+        // 否则，删除该索引
+        arr.splice(arr.indexOf(index), 1);  
+      }
+      // 如果数组长度大于3，删除数组的第一个元素
+      if (arr.length > 3) {
+        arr.shift();  
+      };
+
+      arr.forEach(function(ele) {
+        $('.meat li').eq(ele).addClass('active');
+      })
+    })
+
+    // 创建一个空数组，用于存放选中的data-id值。
+    var datasets = [];
+    var dataset;
+     
+    // 按钮
+    $('.reset').on('click', function(e) {
+      $('ul li').removeClass('active');
+    })
+    
+    $('.submit').on('click', function(e) {
+      var nodeList = $('ul li').filter('.active');
+      // nodeList为类数组，需要转化为数组才能使用数组的forEach方法遍历
+      var arrList = convertToArray(nodeList);
+      arrList.forEach(function(ele) {
+        dataset = ele.dataset.id;
+        datasets.push(dataset);
+      })
+      console.log(datasets);
+    })     
+  })
+
+// 将类数组转化为数组
+function convertToArray (nodeList) {
+  var arr = [];
+  // IE9以下不支持slice方法，故做兼容性处理
+  if (Array.prototype.slice) {
+    arr = [].slice.call(nodeList);
+  } else {
+    for (var i = 0; i < nodeList.length; i++) {
+      arr.push(nodeList[i]);
+    };
+  }
+  return arr;
+}
+
 </script>
 </body>
 </html>
