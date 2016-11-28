@@ -17,10 +17,28 @@
   </div>
 
 <script id = "test" type="text/html">
-  <div class="{{id}}">
-    <p>{{type}}</p>
+  <div class="{{recharge.id}}">
+    <p>{{recharge.type}}</p>
     <ul> 
-      {{each list as value i}}
+      {{each recharge.list as value i}}
+      <li class="item" data-id="{{value.id}}">{{value.text}}</li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="{{fruit.id}}">
+    <p>{{fruit.type}}</p>
+    <ul> 
+      {{each fruit.list as value i}}
+      <li class="item" data-id="{{value.id}}">{{value.text}}</li>
+      {{/each}}
+    </ul>
+  </div>
+
+      <div class="{{meat.id}}">
+    <p>{{meat.type}}</p>
+    <ul> 
+      {{each meat.list as value i}}
       <li class="item" data-id="{{value.id}}">{{value.text}}</li>
       {{/each}}
     </ul>
@@ -117,9 +135,7 @@
       ]
     }
   };
-  var html = template('test', data.recharge);
-  html += template('test', data.fruit);
-  html += template('test', data.meat);
+  var html = template('test', data);
   document.getElementById('content').innerHTML += html;
 </script>
 
@@ -156,7 +172,7 @@
         arr.push(index);  
       } else {
         // 否则，删除该索引
-        arr.splice(arr.indexOf(index), 1);  
+        arr.splice(arr.indexOf(index), 1); 
       }
       // 如果数组长度大于3，删除数组的第一个元素
       if (arr.length > 3) {
@@ -175,9 +191,14 @@
     // 按钮
     $('.reset').on('click', function(e) {
       $('ul li').removeClass('active');
+      arr = [];
+      datasets = [];
+      // console.log(datasets);
     })
     
     $('.submit').on('click', function(e) {
+        // debugger
+
       var nodeList = $('ul li').filter('.active');
       // nodeList为类数组，需要转化为数组才能使用数组的forEach方法遍历
       var arrList = convertToArray(nodeList);
@@ -186,6 +207,7 @@
         datasets.push(dataset);
       })
       console.log(datasets);
+      datasets.splice(0,datasets.length);
     })     
   })
 
