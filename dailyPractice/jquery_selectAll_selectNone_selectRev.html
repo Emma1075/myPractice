@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jquery form</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+  <script src="js/template.js"></script>
+  <style>
+  * {
+    font-size: 18px;
+    text-align: center;
+  }
+  div {
+    margin-bottom: 1em;
+  }
+  input,
+  textarea {
+    border: 1px solid #ccc;
+  }
+  span {
+    display: inline-block;
+    width: 5em;
+    height: 2em;
+    line-height: 2em;
+    background-color: #ccc;
+    color: #fff;
+  }
+  label {
+    display: inline-block;
+    margin-top: 2em;
+    margin-left: 3em;
+  }
+  .btnGroup {
+    margin-top: 2em;
+    margin-left: 2em;
+  }
+  </style>
+</head>
+
+<body>
+<form action="#" method="POST" id="myform">
+  <fieldset>
+    <legend>最爱的水果？</legend>
+    <label for="apple"><input type="checkbox" name="items" value="apple" id="apple">apple</label>
+    <label for="orange"><input type="checkbox" name="items" value="orange" id="orange">orange</label>
+    <label for="banana"><input type="checkbox" name="items" value="banana" id="banana">banana</label>
+    <div class="btnGroup">
+      <input type="button" id="checkAll" value="全选"/>
+      <input type="button" id="checkRev" value="反选"/>
+      <input type="button" id="checkNo" value="全不选"/>
+      <input type="button" id="submit" value="提交"/>
+    </div>
+  </fieldset>
+</form>
+<div class="msg"></div>
+
+<script type="text/javascript">
+$(function() {
+  $('#checkAll').click(function() {
+    $('[name=items]:checkbox').attr('checked',true);
+  })
+  $('#checkNo').click(function() {
+    $('[name=items]:checkbox').attr('checked',false);
+  })
+  $('#checkRev').click(function() {
+    $('[name=items]:checkbox').each(function() {
+      this.checked = !this.checked;
+    })
+  })
+  $('#submit').click(function() {
+    var str = '你选择的是：';
+    $('[name=items]:checkbox:checked').each(function() {
+      str += $(this).val() + ' ';
+    })
+    $('.msg').text(str);
+  })
+})
+</script>
+</body>
+</html>
