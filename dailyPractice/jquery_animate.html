@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jquery form</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+  <script src="js/template.js"></script>
+  <style>
+  * {
+    font-size: 18px;
+    text-align: center;
+  }
+  .focus {
+    background-color: #fcc;
+    border: 1px solid #f00;
+  }
+  div {
+    margin-bottom: 1em;
+  }
+  input,
+  textarea {
+    border: 1px solid #ccc;
+  }
+  span {
+    display: inline-block;
+    width: 5em;
+    height: 2em;
+    line-height: 2em;
+    background-color: #ccc;
+    color: #fff;
+  }
+
+  </style>
+</head>
+
+<body>
+<form action="#" method="POST" id="myform">
+  <fieldset>
+    <legend>我的表单</legend>
+    <div>
+      <span class="bigger">bigger</span>
+      <span class="smaller">smaller</span>
+    </div>
+    <div>
+      <textarea id="msg" rows="8" cols="50"></textarea>
+    </div>
+  </fieldset>
+</form>
+<script type="text/javascript">
+$(function() {
+  var $comment = $('#msg');
+  $('.bigger').click(function() {
+    if ($comment.height() < 500) {
+      $comment.animate({height: '+=50'}, 400);
+    };
+  })
+  $('.smaller').click(function() {
+    if ($comment.height() > 50) {
+      $comment.animate({height: '-=50'}, 400);
+    };
+  })
+})
+
+
+</script>
+</body>
+</html>
