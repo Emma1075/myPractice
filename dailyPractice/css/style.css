@@ -1,0 +1,44 @@
+* {
+  color:  #858585;
+}
+
+#content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+.item {
+  display: inline-block;
+  margin: 0 15px 15px 0;
+  width: 100px;
+  height: 50px;
+  background-color: #FFF;
+  border: 1px solid #C7C7C7;
+}
+
+/*文字居中*/
+.item {
+  text-align: center;
+  line-height: 50px;
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+.active {
+  background-color: #CD2626;
+  border-color:     #CD0000;
+  color: white;
+}
+
+.reset, .submit {
+  width: 90px;
+  float: right;
+  margin: 0 0 0 15px;
+}
+
+.row {
+  margin: 0 15px 15px 0;
+}

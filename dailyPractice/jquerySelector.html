@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jquery selector</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="css/bootstrap-combined.min.css" rel="stylesheet">
+  <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+  <script src="js/template.js"></script>
+  <style>
+  #box {
+    width: 50%;
+    margin: auto;
+  }
+  #box li {
+    display: inline-block;
+    width: 200px;
+    margin-top: 10px;
+    height: 50px;
+    padding: 30px 0;
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+  }
+  .showMore {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+  }
+  .showMore a {
+    text-decoration: none;
+  }
+  .promoted {
+    background-color: #888;
+    color: #fff;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="box"></div>
+  <div class="showMore"><a href="#"><span>显示全部品牌</span></a></div>
+
+<script id = "test" type="text/html">
+  <ul>
+    {{each content as value i}}
+    <li>{{value}}</li>
+    {{/each}}
+  </ul>
+</script>
+
+<script type="text/javascript">
+  var data = {content:["佳能","尼康","三星","索尼","松下","卡西欧","富士","柯达","爱国者","其他品牌"]};
+  var boxHtml = template('test', data);
+  document.getElementById('box').innerHTML = boxHtml;
+</script>
+
+<script type="text/javascript">
+$(function() {
+  // 选择第四个到倒数第二个li。
+  var $category = $('ul>li:gt(2):not(:last)');
+  // 隐藏这部分li
+  $category.hide();
+  var $btn = $('.showMore a');
+
+  $btn.click(function() {
+    // 如果是被隐藏的状态,去掉高亮样式
+    if ($category.is(':visible')) {
+      $category.hide();
+      $('.showMore a span').text('显示全部品牌');
+      $('ul li').removeClass('promoted');
+    } else {
+      // 否则增加高亮样式
+      $category.show();
+      $('.showMore a span').text('精简显示品牌');
+      $('ul li').filter(':contains("佳能"),:contains("松下")').addClass('promoted');
+    }
+    return false;
+  })
+})
+</script>
+</body>
+</html>

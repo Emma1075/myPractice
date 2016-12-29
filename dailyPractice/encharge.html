@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>recharge</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="css/bootstrap-combined.min.css" rel="stylesheet">
+  <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+  <script src="js/template.js"></script>
+</head>
+<body>
+  <div id="content" data-name="test1">
+    <div class="row">
+      <button class="btn reset">reset</button>
+      <button class="btn submit">submit</button>
+    </div> 
+  </div>
+
+<script id = "test" type="text/html">
+  <div class="{{recharge.id}}">
+    <p>{{recharge.type}}</p>
+    <ul> 
+      {{each recharge.list as value i}}
+      <li class="item" data-id="{{value.id}}">{{value.text}}</li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="{{fruit.id}}">
+    <p>{{fruit.type}}</p>
+    <ul> 
+      {{each fruit.list as value i}}
+      <li class="item" data-id="{{value.id}}">{{value.text}}</li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="{{meat.id}}">
+    <p>{{meat.type}}</p>
+    <ul> 
+      {{each meat.list as value i}}
+      <li class="item" data-id="{{value.id}}">{{value.text}}</li>
+      {{/each}}
+    </ul>
+  </div>
+</script>
+
+<script type="text/javascript">
+  var data = {recharge: {
+      "id": "recharge", 
+      "type": "充值", 
+      "list": [
+        {
+          "id": "100", 
+          "text": "100元"
+        }, 
+        {
+          "id": "300", 
+          "text": "300元"
+        }, 
+        {
+          "id": "500", 
+          "text": "500元"
+        }, 
+        {
+          "id": "1000", 
+          "text": "1000元"
+        }, 
+        {
+          "id": "1500", 
+          "text": "1500元"
+        }, 
+        {
+          "id": "2000", 
+          "text": "2000元"
+        }
+      ]
+    }, fruit: {
+      "id": "fruit", 
+      "type": "蔬菜", 
+      "list": [
+        {
+          "id": "potato", 
+          "text": "土豆"
+        }, 
+        {
+          "id": "bamboo", 
+          "text": "竹笋"
+        }, 
+        {
+          "id": "broccoli", 
+          "text": "花椰菜"
+        }, 
+        {
+          "id": "carrot", 
+          "text": "胡萝卜"
+        }, 
+        {
+          "id": "corn", 
+          "text": "玉米"
+        }, 
+        {
+          "id": "lettuce", 
+          "text": "生菜"
+        }
+      ]
+    }, meat: {
+      "id": "meat", 
+      "type": "肉类", 
+      "list": [
+        {
+          "id": "chicken", 
+          "text": "鸡肉"
+        }, 
+        {
+          "id": "duck", 
+          "text": "鸭肉"
+        }, 
+        {
+          "id": "beef", 
+          "text": "牛肉"
+        }, 
+        {
+          "id": "mutton", 
+          "text": "羊肉"
+        }, 
+        {
+          "id": "fish", 
+          "text": "鱼肉"
+        }, 
+        {
+          "id": "pork", 
+          "text": "猪肉"
+        }
+      ]
+    }
+  };
+  var html = template('test', data);
+  document.getElementById('content').innerHTML += html;
+</script>
+
+<script type="text/javascript">
+  
+  // 采用事件委托，绑定在父级元素上
+  $(function(){
+    
+    // 单选
+    var arrTemp = [];
+    $('.recharge ul').on('click', 'li', function(e) {
+      var addIndex = $(this).index();
+      var delIndex = arrTemp.shift();
+
+      // 给上一步添加active样式的元素删除所添加样式
+      $('.recharge li').eq(delIndex).removeClass('active');
+
+      // 给点击的元素添加active样式
+      $(this).addClass('active');
+      
+      // 将点击元素的索引值放入数组中
+      arrTemp.push(addIndex);
+
+    })
+    
+    // 多选.点一下选中，再点一下取消
+    $('.fruit ul').on('click', 'li', function(e) {
+      if ($(this).hasClass('active')) {
+        $(this).removeClass('active');
+      } else {
+        $(this).addClass('active');
+      }
+    })
+
+    // 特别的多选：只能选3个.第4个被选中时，第1个被选中的li元素取消选中状态。
+    var arr = []; // 通过数组来存放选中元素的索引
+    $('.meat ul').on('click', 'li', function(e) {
+      // 获取索引
+      var index = $(this).index();  
+      
+      // 如果数组里没有这个索引值，则加入数组并添加样式
+      if (arr.indexOf(index) == -1) {
+        arr.push(index);  
+        $('.meat li').eq(index).addClass('active');
+      } else {
+        // 否则，删除该索引，并删除该索引元素的active样式
+        arr.splice(arr.indexOf(index), 1);
+        $('.meat li').eq(index).removeClass('active'); 
+      }
+
+      // 如果数组长度大于3，删除数组的第1个元素，并删除该索引元素的active样式
+      if (arr.length > 3) {
+        var del = arr.shift();
+        $('.meat li').eq(del).removeClass('active');  
+      };
+    })
+
+     
+    // 按钮
+    $('.reset').on('click', function(e) {
+      $('ul li').removeClass('active');
+      arr = [];
+      datasets = [];
+    })
+    // 创建一个空数组，用于存放选中的data-id值。  
+    var datasets = [];
+    var dataset;
+    $('.submit').on('click', function(e) {
+      var nodeList = $('ul li').filter('.active');
+      // nodeList为类数组，需要转化为数组才能使用数组的forEach方法遍历
+      var arrList = convertToArray(nodeList);
+      arrList.forEach(function(ele) {
+        dataset = ele.dataset.id;
+        datasets.push(dataset);
+      })
+      console.log(datasets);
+      // 将数组datasets清空。还可采用datasets.splice(0,datasets.length)方法来清空，但不能用datasets = []清空
+      datasets.length = 0; 
+    })
+  })
+
+// 将类数组转化为数组
+function convertToArray (nodeList) {
+  var arr = [];
+  // IE9以下不支持slice方法，故做兼容性处理
+  if (Array.prototype.slice) {
+    arr = [].slice.call(nodeList);
+  } else {
+    for (var i = 0; i < nodeList.length; i++) {
+      arr.push(nodeList[i]);
+    };
+  }
+  return arr;
+}
+
+</script>
+</body>
+</html>
