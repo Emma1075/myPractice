@@ -65,7 +65,7 @@ $(function() {
   })
 
   // 全部添加到右边
-  $('#add_all').click(function() {
+  $('#add_all').dbclick(function() {
     var $allOptions = $('#select1 option');
     $allOptions.appendTo($select2);
   })
@@ -77,7 +77,7 @@ $(function() {
   })
 
   // 全部删除到左边
-  $('#remove_all').click(function() {
+  $('#remove_all').dbclick(function() {
     var $allOptions = $('#select2 option');
     $allOptions.appendTo(select1);
   })
