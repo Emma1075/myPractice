@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jquery 下拉框</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+  <script src="js/template.js"></script>
+  <style>
+  .selectBox {
+    float: left;
+  }
+  .selectBox span {
+    display: block;
+    width: 10em;
+    height: 1.5em;
+    color: white;
+    background-color: #ccc;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-right: 1em;
+  }
+
+  select {
+    width: 12em;
+    height: 15em;
+  }
+
+  </style>
+</head>
+
+<body>
+<div class="selectBox">
+  <select multiple id="select1">
+    <option value="1">选项1</option>
+    <option value="2">选项2</option>
+    <option value="3">选项3</option>
+    <option value="4">选项4</option>
+    <option value="5">选项5</option>
+  </select>
+  <div>
+    <span id="add">选中添加到右边&gt;&gt;</span>
+    <span id="add_all">全部添加到右边&gt;&gt;</span>
+  </div>
+</div>
+
+<div class="selectBox">
+  <select multiple id="select2"></select>
+  <div>
+    <span id="remove">&lt;&lt;选中删除到左边</span>
+    <span id="remove_all">&lt;&lt;全部删除到左边</span>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+  var $select1 = $('#select1');
+  var $select2 = $('#select2');
+
+  // 选中添加到右边
+  $('#add').click(function() {
+    var $options = $('#select1 option:selected');
+    $options.remove();
+    $select2.append($options);
+  })
+
+  // 全部添加到右边
+  $('#add_all').click(function() {
+    var $allOptions = $('#select1 option');
+    $allOptions.remove();
+    $select2.append($allOptions);
+  })
+
+  // 选中删除到左边
+  $('#remove').click(function() {
+    var $options = $('#select2 option:selected');
+    $options.remove();
+    $select1.append($options);
+  })
+
+  // 全部删除到左边
+  $('#remove_all').click(function() {
+    var $allOptions = $('#select2 option');
+    $allOptions.remove();
+    $select1.append($allOptions);
+  })
+})
+
+</script>
+</body>
+</html>
