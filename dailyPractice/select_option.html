@@ -60,29 +60,26 @@ $(function() {
   // 选中添加到右边
   $('#add').click(function() {
     var $options = $('#select1 option:selected');
-    $options.remove();
-    $select2.append($options);
+    // 用appendTo()方法代替 remove() 和 append()
+    $options.appendTo($select2);
   })
 
   // 全部添加到右边
   $('#add_all').click(function() {
     var $allOptions = $('#select1 option');
-    $allOptions.remove();
-    $select2.append($allOptions);
+    $allOptions.appendTo($select2);
   })
 
   // 选中删除到左边
   $('#remove').click(function() {
     var $options = $('#select2 option:selected');
-    $options.remove();
-    $select1.append($options);
+    $options.appendTo($select1);
   })
 
   // 全部删除到左边
   $('#remove_all').click(function() {
     var $allOptions = $('#select2 option');
-    $allOptions.remove();
-    $select1.append($allOptions);
+    $allOptions.appendTo(select1);
   })
 })
 
