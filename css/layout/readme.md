@@ -1,7 +1,7 @@
 
 
 ## 1.圣杯布局与双飞翼布局
-[千玺圣杯布局与双飞翼布局](https://theqwang.github.io/2016/01/08/%E6%B5%85%E6%9E%90%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E5%92%8C%E5%8F%8C%E9%A3%9E%E7%BF%BC%E5%B8%83%E5%B1%80/)
+[浅析圣杯布局与双飞翼布局](https://theqwang.github.io/2016/01/08/%E6%B5%85%E6%9E%90%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E5%92%8C%E5%8F%8C%E9%A3%9E%E7%BF%BC%E5%B8%83%E5%B1%80/)
 
 ## 2.flex 布局
 
@@ -50,6 +50,8 @@ css 代码
   }
 
 ```
-> 参考：[详解 flex-grow 与 flex-shrink](https://zhuanlan.zhihu.com/p/24372279);
+参考：[详解 flex-grow 与 flex-shrink](https://zhuanlan.zhihu.com/p/24372279);
+
 [flex语法篇-阮一峰](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)；
+
 [flex教程-阮一峰](http://www.ruanyifeng.com/blog/2015/07/flex-examples.html);
