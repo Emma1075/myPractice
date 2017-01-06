@@ -55,3 +55,5 @@ css 代码
 [flex语法篇-阮一峰](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)；
 
 [flex教程-阮一峰](http://www.ruanyifeng.com/blog/2015/07/flex-examples.html);
+
+[flex布局解决问题](https://philipwalton.github.io/solved-by-flexbox/)
